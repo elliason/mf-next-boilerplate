@@ -1,0 +1,8 @@
+{
+  "name": "mf-next-boilerplate",
+  "version": "0.0.1",
+  "description": "boilerplate for next js based projects",
+  "main": "index.js",
+  "author": "Media Factory CZ <info@mediafactorygroup.cz>",
+  "private": true
+}
