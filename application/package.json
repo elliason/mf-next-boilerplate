@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@media-factory-cz/eslint-config": "^1.0.3",
+    "@media-factory-cz/eslint-config-react": "^1.0.4",
     "@media-factory-cz/prettier-config": "^1.0.2",
     "@media-factory-cz/stylelint-config": "^1.0.4",
     "@media-factory-cz/typescript-config": "^1.0.4",

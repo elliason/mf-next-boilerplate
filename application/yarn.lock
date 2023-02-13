@@ -84,6 +84,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@media-factory-cz/eslint-config-react@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@media-factory-cz/eslint-config-react/-/eslint-config-react-1.0.4.tgz#51e35df6c5aee0471bb1b3040317f5036d54e29e"
+  integrity sha512-vYGtWSnYjgLBVs4LDzTtRny7R8nVNHTpsoNp1SeQ9er1+E+jPkitgv7gX++TShmtt5H/N2lJnM/Udaa+uf06VA==
+
 "@media-factory-cz/eslint-config@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@media-factory-cz/eslint-config/-/eslint-config-1.0.3.tgz#7ee6c9514a70eefd3654d399757735ef14ddb223"
