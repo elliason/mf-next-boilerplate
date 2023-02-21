@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "lint": {
+      "outputs": [],
+      "dependsOn": []
+    },
+    "test": {
+      "outputs": [],
+      "dependsOn": []
+    },
+    "build": {
+      "outputs": ["dist/**", ".next/**"],
+      "dependsOn": ["lint", "test"]
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
