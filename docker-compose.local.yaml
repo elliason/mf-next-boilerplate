@@ -24,7 +24,6 @@ services:
     working_dir: /var/www/html/application
     entrypoint: "yarn dev"
     labels:
-      - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
       - "traefik.enable=true"
       - "traefik.docker.network=default"
       - "traefik.http.routers.${APP_ID}-secure.rule=HostRegexp(`${APP_HOST}`)"
@@ -33,6 +32,7 @@ services:
       - "traefik.http.routers.${APP_ID}-secure.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-secure.tls.domains[0].main=${APP_HOST}"
       - "traefik.http.services.${APP_ID}.loadbalancer.server.port=3000"
+      - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
     user: ${MY_UID}:${MY_GID}
     networks:
       - default
