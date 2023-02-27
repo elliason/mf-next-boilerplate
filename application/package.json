@@ -1,5 +1,5 @@
 {
-  "name": "mf-next-boilerplate",
+  "name": "@mf-project/tsconfig",
   "version": "0.0.1",
   "description": "boilerplate for next js based projects",
   "author": "Media Factory CZ <info@mediafactorygroup.cz>",
@@ -8,15 +8,24 @@
   "engines": {
     "node": ">=18"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "docs"
+  ],
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "test": "turbo run test"
   },
   "devDependencies": {
     "@media-factory-cz/prettier-config": "^1.0.3",
     "@types/node": "^18.14.0",
     "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "turbo": "^1.8.2"
   }
 }
