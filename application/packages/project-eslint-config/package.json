@@ -1,7 +1,7 @@
 {
   "name": "@mf-project/eslint-config",
   "version": "0.0.0",
-  "main": "index.js",
+  "private": true,
   "dependencies": {
     "@media-factory-cz/eslint-config": "^1.0.3",
     "@media-factory-cz/eslint-config-react": "^1.0.4",

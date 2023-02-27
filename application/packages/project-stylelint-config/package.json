@@ -2,6 +2,7 @@
   "name": "@mf-project/stylelint-config",
   "version": "0.0.0",
   "main": "index.js",
+  "private": true,
   "dependencies": {
     "@media-factory-cz/stylelint-config": "^1.0.6",
     "stylelint": "^15.2.0",

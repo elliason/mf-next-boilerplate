@@ -2,6 +2,7 @@
   "name": "@mf-project/node-utils",
   "version": "0.0.1",
   "type": "module",
+  "private": true,
   "exports": {
     "require": "./dist/index.js",
     "import": "./dist/index.mjs"
