@@ -1,0 +1,6 @@
+{
+  "extends": "@mf-project/tsconfig/base.json",
+  "compilerOptions": {},
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}
