@@ -1,7 +1,7 @@
 {
   "name": "@mf-project/tsconfig",
   "version": "0.0.1",
-  "description": "boilerplate for next js based projects",
+  "description": "Media Factory boilerplate for next js based projects",
   "author": "Media Factory CZ <info@mediafactorygroup.cz>",
   "private": true,
   "type": "module",
@@ -15,10 +15,10 @@
   ],
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
-    "build": "turbo run build",
-    "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "test": "dotenv turbo run test",
+    "build": "dotenv turbo run build",
+    "dev": "dotenv turbo run dev"
   },
   "devDependencies": {
     "@media-factory-cz/prettier-config": "^1.0.3",
@@ -26,6 +26,7 @@
     "prettier": "^2.8.4"
   },
   "dependencies": {
+    "dotenv-cli": "^7.0.0",
     "turbo": "^1.8.2"
   }
 }
