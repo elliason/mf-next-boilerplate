@@ -1,10 +1,10 @@
 {
-  "name": "@mf-project/utils",
+  "name": "@mf-project/node-utils",
   "version": "0.0.1",
   "type": "module",
   "exports": {
-    "require": "./dist/index.cjs",
-    "import": "./dist/index.js"
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
   "types": "dist/index.d.ts",
   "engines": {
@@ -20,7 +20,7 @@
     "clean": "rm -rf dist/*"
   },
   "devDependencies": {
-    "@mf-project/eslint-config": "workspace:^0.0.0",
+    "@mf-project/eslint-config": "workspace:*",
     "@mf-project/tsconfig": "*",
     "@total-typescript/ts-reset": "^0.3.7",
     "tsup": "^6.6.3",

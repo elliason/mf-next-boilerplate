@@ -87,6 +87,20 @@ importers:
     devDependencies:
       typescript: 4.9.5
 
+  packages/project-node-utils:
+    specifiers:
+      '@mf-project/eslint-config': workspace:*
+      '@mf-project/tsconfig': '*'
+      '@total-typescript/ts-reset': ^0.3.7
+      tsup: ^6.6.3
+      typescript: ^4.9.5
+    devDependencies:
+      '@mf-project/eslint-config': link:../project-eslint-config
+      '@mf-project/tsconfig': link:../project-tsconfig
+      '@total-typescript/ts-reset': 0.3.7
+      tsup: 6.6.3_typescript@4.9.5
+      typescript: 4.9.5
+
   packages/project-stylelint-config:
     specifiers:
       '@media-factory-cz/stylelint-config': ^1.0.6
@@ -148,7 +162,7 @@ importers:
   packages/project-utils:
     specifiers:
       '@mf-project/eslint-config': workspace:^0.0.0
-      '@mf-project/tsconfig': workspace:^0.0.1
+      '@mf-project/tsconfig': '*'
       '@total-typescript/ts-reset': ^0.3.7
       tsup: ^6.6.3
       typescript: ^4.9.5
