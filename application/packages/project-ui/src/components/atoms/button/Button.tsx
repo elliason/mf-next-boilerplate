@@ -7,11 +7,17 @@ export interface ButtonProps {
     onClick?: () => void;
     HTMLAttributes?: React.HTMLAttributes<HTMLButtonElement>;
     children?: React.ReactNode;
+    backgroundColor?: string;
 }
 
-export const Button = ({ className, onClick, HTMLAttributes, children }: ButtonProps) => {
+export const Button = ({ className, onClick, HTMLAttributes, backgroundColor, children }: ButtonProps) => {
     return (
-        <button className={clsx(styles.button, className)} onClick={onClick} {...HTMLAttributes}>
+        <button
+            className={clsx(styles.button, className)}
+            onClick={onClick}
+            style={{ backgroundColor }}
+            {...HTMLAttributes}
+        >
             {children}
         </button>
     );

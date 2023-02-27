@@ -16,6 +16,7 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
             name: '@mf-project/ui',
             formats: ['es', 'umd', 'cjs'],
+            fileName: (format) => `index.${format}.js`,
         },
         rollupOptions: {
             external: ['react', 'react-dom'],
