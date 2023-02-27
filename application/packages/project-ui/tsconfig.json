@@ -1,7 +1,8 @@
 {
   "extends": "@mf-project/tsconfig/react-library.json",
   "compilerOptions": {
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "noEmit": true
   },
   "include": ["src", "vite.config.ts"],
   "exclude": ["dist", "build", "node_modules"]

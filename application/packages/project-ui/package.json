@@ -9,9 +9,13 @@
     "lint:scripts": "eslint --ext .ts,.tsx,.js,.jsx,.mjs,.cjs",
     "lint:scripts:fix": "eslint --ext .ts,.tsx,.js,.jsx,.mjs,.cjs --fix",
     "lint:ts": "tsc --noEmit",
-    "dev": "vite --host",
-    "build": "vite build",
+    "dev": "tsc --watch && vite build --watch",
+    "dev:server": "vite --host",
+    "build": "tsc && vite build",
     "preview": "vite preview"
+  },
+  "comments": {
+    "dev:server": "Runs vite dev server with index.html as entrypoint"
   },
   "devDependencies": {
     "@mf-project/eslint-config": "workspace:*",
