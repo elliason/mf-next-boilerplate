@@ -10,7 +10,7 @@
     "lint:scripts:fix": "eslint --ext .ts,.tsx,.js,.jsx,.mjs,.cjs --fix",
     "lint:ts": "tsc --noEmit",
     "dev": "vite --host",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
