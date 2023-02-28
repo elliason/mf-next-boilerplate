@@ -10,50 +10,50 @@ x-defaults: &defaults
 
 networks:
   default:
-    external:
-    name: webapp
+    external: true
+    name: ${DOCKER_NETWORK}
 
 services:
-  nextjs:
+  web:
     <<: *defaults
-    image: ${APP_NODE_IMAGE}
-    container_name: "${APP_ID}-nextjs"
-    hostname: "${APP_HOSTNAME}-nextjs"
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-web"
+    hostname: "${APP_ID}-web"
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/application
-    entrypoint: "yarn dev"
+    command: pnpm dev
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=default"
-      - "traefik.http.routers.${APP_ID}-secure.rule=HostRegexp(`${APP_HOST}`)"
-      - "traefik.http.routers.${APP_ID}-secure.entrypoints=https"
-      - "traefik.http.routers.${APP_ID}-secure.tls=true"
-      - "traefik.http.routers.${APP_ID}-secure.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-secure.tls.domains[0].main=${APP_HOST}"
-      - "traefik.http.services.${APP_ID}.loadbalancer.server.port=3000"
+      - "traefik.http.routers.${APP_ID}-web.rule=HostRegexp(`${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-web.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-web.tls=true"
+      - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=${WEB_HOST}"
+      - "traefik.http.services.${APP_ID}-web.loadbalancer.server.port=3000"
       - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
     user: ${MY_UID}:${MY_GID}
     networks:
       - default
 
-  app-storybook:
-    <<: *defaults
-    image: ${APP_NODE_IMAGE}
-    container_name: "${APP_ID}-storybook"
-    hostname: "${APP_HOSTNAME}-storybook"
-    command: "yarn storybook-react"
-    volumes:
-      - ./:/var/www/html
-    working_dir: /var/www/html/application
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=webapp"
-      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${APP_HOST}`)"
-      - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
-      - "traefik.http.routers.${APP_ID}-storybook.tls=true"
-      - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${APP_HOST}"
-      - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
-    networks:
-      - webapp
+  # app-storybook:
+  #   <<: *defaults
+  #   image: ${NODE_IMAGE}
+  #   container_name: "${APP_ID}-storybook"
+  #   hostname: "${WEB_HOSTNAME}-storybook"
+  #   command: "yarn storybook-react"
+  #   volumes:
+  #     - ./:/var/www/html
+  #   working_dir: /var/www/html/application
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.docker.network=webapp"
+  #     - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
+  #     - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
+  #     - "traefik.http.routers.${APP_ID}-storybook.tls=true"
+  #     - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
+  #     - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+  #     - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
+  #   networks:
+  #     - webapp

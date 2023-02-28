@@ -3,7 +3,7 @@ include .env
 CURRENT_UID=`id -u`
 
 init:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash -c "yarn";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn";
 
 start:
 	./bin/start
@@ -15,25 +15,25 @@ restart:
 	./bin/restart
 
 run-node:
-	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash;
+	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
 clear-node-modules:
-	docker run --rm -v `pwd`/application:/var/www/html -w /var/www/html/ $(APP_NODE_IMAGE) bash -c "yarn clear-modules";
+	docker run --rm -v `pwd`/application:/var/www/html -w /var/www/html/ $(NODE_IMAGE) bash -c "yarn clear-modules";
 
 ###########################################
 ######### CODE QUALITY ###########
 ###########################################
 lint-fix:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash -c "yarn lint:fix";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn lint:fix";
 
 lint:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash -c "yarn lint";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn lint";
 
 format:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash -c "yarn format";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn format";
 
 test:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(APP_NODE_IMAGE) bash -c "yarn test";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn test";
 
 ###########################################
 ######### DOCUMENTATION SECTION ###########

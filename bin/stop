@@ -25,7 +25,10 @@ if [[ -z "$DOCKER_HOST_MACHINE_IP" ]]; then
     export DOCKER_HOST_MACHINE_IP="$(docker network inspect --format='{{range .IPAM.Config}}{{.Gateway}}{{end}}' webapp)"
 fi
 
-ARGS="-f $rootPath/docker-compose.base.yaml -f $rootPath/docker-compose.$RUNENV.yaml"
+export MY_UID="$(id -u)"
+export MY_GID="$(id -g)"
+
+ARGS="-f $rootPath/docker-compose.$RUNENV.yaml"
 
 if [[ -f "$rootPath/docker-compose.extras.yaml" ]]; then
     ARGS="$ARGS -f $rootPath/docker-compose.extras.yaml"
