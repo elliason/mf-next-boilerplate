@@ -28,9 +28,6 @@ fi
 export MY_UID="$(id -u)"
 export MY_GID="$(id -g)"
 
-echo "${MY_GID}"
-echo "${MY_UID}"
-
 ARGS="-f $rootPath/docker-compose.$RUNENV.yaml"
 
 #docker-compose ${ARGS} pull
