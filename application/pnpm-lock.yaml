@@ -17,6 +17,69 @@ importers:
       '@types/node': 18.14.0
       prettier: 2.8.4
 
+  apps/ui-storybook:
+    specifiers:
+      '@jest/globals': ^29.4.3
+      '@mf-project/tsconfig': workspace:*
+      '@mf-project/ui': workspace:*
+      '@storybook/addon-actions': ^6.5.16
+      '@storybook/addon-essentials': ^6.5.16
+      '@storybook/addon-interactions': ^6.5.16
+      '@storybook/addon-links': ^6.5.16
+      '@storybook/builder-webpack5': ^6.5.16
+      '@storybook/cli': ^7.0.0-beta.55
+      '@storybook/manager-webpack5': ^6.5.16
+      '@storybook/react': ^6.5.16
+      '@storybook/testing-library': ^0.0.13
+      '@swc/core': ^1.3.36
+      '@testing-library/jest-dom': ^5.16.5
+      '@testing-library/react': ^13.4.0
+      '@testing-library/user-event': ^14.4.3
+      '@types/react': ^18.0.27
+      '@types/react-dom': ^18.0.10
+      jest: ^29.4.3
+      jest-environment-jsdom: ^29.4.3
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      serve: ^14.2.0
+      storybook: ^6.5.16
+      storybook-addon-swc: ^1.1.9
+      ts-jest: ^29.0.5
+      tsconfig-paths-webpack-plugin: ^4.0.0
+      typescript: ^4.9.5
+      whatwg-fetch: ^3.6.2
+    dependencies:
+      '@mf-project/ui': link:../../packages/project-ui
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      serve: 14.2.0
+      whatwg-fetch: 3.6.2
+    devDependencies:
+      '@jest/globals': 29.4.3
+      '@mf-project/tsconfig': link:../../packages/project-tsconfig
+      '@storybook/addon-actions': 6.5.16_biqbaboplfbrettd7655fr4n2y
+      '@storybook/addon-essentials': 6.5.16_neurjzuqjhejqabnvr77776abe
+      '@storybook/addon-interactions': 6.5.16_fleixqh4h74dmdivs7fx6vtiqe
+      '@storybook/addon-links': 6.5.16_biqbaboplfbrettd7655fr4n2y
+      '@storybook/builder-webpack5': 6.5.16_mmeo2ujaeyl4zovsjx2gokhzxa
+      '@storybook/cli': 7.0.0-beta.55
+      '@storybook/manager-webpack5': 6.5.16_mmeo2ujaeyl4zovsjx2gokhzxa
+      '@storybook/react': 6.5.16_5dqbgyqgamildm2ywtfv2o6zfy
+      '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
+      '@swc/core': 1.3.36
+      '@testing-library/jest-dom': 5.16.5
+      '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
+      '@testing-library/user-event': 14.4.3_@testing-library+dom@9.0.0
+      '@types/react': 18.0.28
+      '@types/react-dom': 18.0.11
+      jest: 29.4.3
+      jest-environment-jsdom: 29.4.3
+      storybook: 6.5.16_ygqkwb4gg3aean7xjfdauovyqq
+      storybook-addon-swc: 1.1.9_webpack@5.75.0
+      ts-jest: 29.0.5_yijmapqo5j3w3iyfv52hrltpde
+      tsconfig-paths-webpack-plugin: 4.0.0
+      typescript: 4.9.5
+
   apps/web:
     specifiers:
       '@mf-project/eslint-config': workspace:*
@@ -213,69 +276,6 @@ importers:
       vite: 4.1.4_sass@1.58.3
       vite-plugin-dts: 2.0.2_vite@4.1.4
       vitest: 0.29.1_jsdom@21.1.0+sass@1.58.3
-
-  packages/project-ui-storybook:
-    specifiers:
-      '@jest/globals': ^29.4.3
-      '@mf-project/tsconfig': workspace:*
-      '@mf-project/ui': workspace:*
-      '@storybook/addon-actions': ^6.5.16
-      '@storybook/addon-essentials': ^6.5.16
-      '@storybook/addon-interactions': ^6.5.16
-      '@storybook/addon-links': ^6.5.16
-      '@storybook/builder-webpack5': ^6.5.16
-      '@storybook/cli': ^7.0.0-beta.55
-      '@storybook/manager-webpack5': ^6.5.16
-      '@storybook/react': ^6.5.16
-      '@storybook/testing-library': ^0.0.13
-      '@swc/core': ^1.3.36
-      '@testing-library/jest-dom': ^5.16.5
-      '@testing-library/react': ^13.4.0
-      '@testing-library/user-event': ^14.4.3
-      '@types/react': ^18.0.27
-      '@types/react-dom': ^18.0.10
-      jest: ^29.4.3
-      jest-environment-jsdom: ^29.4.3
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      serve: ^14.2.0
-      storybook: ^6.5.16
-      storybook-addon-swc: ^1.1.9
-      ts-jest: ^29.0.5
-      tsconfig-paths-webpack-plugin: ^4.0.0
-      typescript: ^4.9.5
-      whatwg-fetch: ^3.6.2
-    dependencies:
-      '@mf-project/ui': link:../project-ui
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      serve: 14.2.0
-      whatwg-fetch: 3.6.2
-    devDependencies:
-      '@jest/globals': 29.4.3
-      '@mf-project/tsconfig': link:../project-tsconfig
-      '@storybook/addon-actions': 6.5.16_biqbaboplfbrettd7655fr4n2y
-      '@storybook/addon-essentials': 6.5.16_neurjzuqjhejqabnvr77776abe
-      '@storybook/addon-interactions': 6.5.16_fleixqh4h74dmdivs7fx6vtiqe
-      '@storybook/addon-links': 6.5.16_biqbaboplfbrettd7655fr4n2y
-      '@storybook/builder-webpack5': 6.5.16_mmeo2ujaeyl4zovsjx2gokhzxa
-      '@storybook/cli': 7.0.0-beta.55
-      '@storybook/manager-webpack5': 6.5.16_mmeo2ujaeyl4zovsjx2gokhzxa
-      '@storybook/react': 6.5.16_5dqbgyqgamildm2ywtfv2o6zfy
-      '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
-      '@swc/core': 1.3.36
-      '@testing-library/jest-dom': 5.16.5
-      '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
-      '@testing-library/user-event': 14.4.3_@testing-library+dom@9.0.0
-      '@types/react': 18.0.28
-      '@types/react-dom': 18.0.11
-      jest: 29.4.3
-      jest-environment-jsdom: 29.4.3
-      storybook: 6.5.16_ygqkwb4gg3aean7xjfdauovyqq
-      storybook-addon-swc: 1.1.9_webpack@5.75.0
-      ts-jest: 29.0.5_yijmapqo5j3w3iyfv52hrltpde
-      tsconfig-paths-webpack-plugin: 4.0.0
-      typescript: 4.9.5
 
   packages/project-utils:
     specifiers:
@@ -2936,7 +2936,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm/0.17.10:
@@ -2954,7 +2953,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-arm64/0.17.10:
@@ -2972,7 +2970,6 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/android-x64/0.17.10:
@@ -2990,7 +2987,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-arm64/0.17.10:
@@ -3008,7 +3004,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/darwin-x64/0.17.10:
@@ -3026,7 +3021,6 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-arm64/0.17.10:
@@ -3044,7 +3038,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/freebsd-x64/0.17.10:
@@ -3062,7 +3055,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm/0.17.10:
@@ -3080,7 +3072,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-arm64/0.17.10:
@@ -3098,7 +3089,6 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ia32/0.17.10:
@@ -3116,7 +3106,6 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-loong64/0.17.10:
@@ -3134,7 +3123,6 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-mips64el/0.17.10:
@@ -3152,7 +3140,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-ppc64/0.17.10:
@@ -3170,7 +3157,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-riscv64/0.17.10:
@@ -3188,7 +3174,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-s390x/0.17.10:
@@ -3206,7 +3191,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/linux-x64/0.17.10:
@@ -3224,7 +3208,6 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/netbsd-x64/0.17.10:
@@ -3242,7 +3225,6 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/openbsd-x64/0.17.10:
@@ -3260,7 +3242,6 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/sunos-x64/0.17.10:
@@ -3278,7 +3259,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-arm64/0.17.10:
@@ -3296,7 +3276,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-ia32/0.17.10:
@@ -3314,7 +3293,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@esbuild/win32-x64/0.17.10:
@@ -6189,7 +6167,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-darwin-x64/1.3.36:
@@ -6198,7 +6175,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-linux-arm-gnueabihf/1.3.36:
@@ -6207,7 +6183,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-linux-arm64-gnu/1.3.36:
@@ -6216,7 +6191,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-linux-arm64-musl/1.3.36:
@@ -6225,7 +6199,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-linux-x64-gnu/1.3.36:
@@ -6234,7 +6207,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-linux-x64-musl/1.3.36:
@@ -6243,7 +6215,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-win32-arm64-msvc/1.3.36:
@@ -6252,7 +6223,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-win32-ia32-msvc/1.3.36:
@@ -6261,7 +6231,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core-win32-x64-msvc/1.3.36:
@@ -6270,7 +6239,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@swc/core/1.3.36:
@@ -6288,7 +6256,6 @@ packages:
       '@swc/core-win32-arm64-msvc': 1.3.36
       '@swc/core-win32-ia32-msvc': 1.3.36
       '@swc/core-win32-x64-msvc': 1.3.36
-    dev: true
 
   /@swc/helpers/0.4.14:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
@@ -7918,7 +7885,7 @@ packages:
       loader-utils: 2.0.4
       make-dir: 3.1.0
       schema-utils: 2.7.1
-      webpack: 5.75.0
+      webpack: 5.75.0_vtoi35pt7ox7clreeappmlbt3e
 
   /babel-plugin-add-react-displayname/0.0.5:
     resolution: {integrity: sha512-LY3+Y0XVDYcShHHorshrDbt4KFWL4bSeniCtl4SYZbask+Syngk1uMPCeN9+nSiZo6zX5s0RTq/J9Pnaaf/KHw==}
@@ -10259,7 +10226,6 @@ packages:
       '@esbuild/win32-arm64': 0.16.17
       '@esbuild/win32-ia32': 0.16.17
       '@esbuild/win32-x64': 0.16.17
-    dev: true
 
   /esbuild/0.17.10:
     resolution: {integrity: sha512-n7V3v29IuZy5qgxx25TKJrEm0FHghAlS6QweUcyIgh/U0zYmQcvogWROitrTyZId1mHSkuhhuyEXtI9OXioq7A==}
@@ -12145,7 +12111,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.75.0
+      webpack: 5.75.0_vtoi35pt7ox7clreeappmlbt3e
 
   /htmlparser2/6.1.0:
     resolution: {integrity: sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==}
@@ -18504,7 +18470,6 @@ packages:
       serialize-javascript: 6.0.1
       terser: 5.16.5
       webpack: 5.75.0_vtoi35pt7ox7clreeappmlbt3e
-    dev: true
 
   /terser-webpack-plugin/5.3.6_webpack@5.75.0:
     resolution: {integrity: sha512-kfLFk+PoLUQIbLmB1+PZDMRSZS99Mp+/MHqDNmMA6tOItzRt+Npe3E+fsMs5mfcM0wCtrrdU387UnV+vnSffXQ==}
@@ -20066,7 +20031,6 @@ packages:
       - '@swc/core'
       - esbuild
       - uglify-js
-    dev: true
 
   /webpackbar/5.0.2_webpack@5.75.0:
     resolution: {integrity: sha512-BmFJo7veBDgQzfWXl/wwYXr/VFus0614qZ8i9znqcl9fnEdiVkdbi0TedLQ6xAK92HZHDJ0QmyQ0fmuZPAgCYQ==}

@@ -16,9 +16,12 @@
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
     "lint": "turbo run lint",
-    "test": "dotenv turbo run test",
-    "build": "dotenv turbo run build",
-    "dev": "dotenv turbo run dev"
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "build:graph": "turbo run build --graph=my-graph.png",
+    "dev:web": "turbo run dev --filter=@mf-project/web",
+    "build:web": "turbo run build --filter=@mf-project/web..."
   },
   "devDependencies": {
     "@media-factory-cz/prettier-config": "^1.0.3",
@@ -26,7 +29,6 @@
     "prettier": "^2.8.4"
   },
   "dependencies": {
-    "dotenv-cli": "^7.0.0",
     "turbo": "^1.8.2"
   }
 }

@@ -18,7 +18,6 @@ services:
     <<: *defaults
     image: ${NODE_IMAGE}
     container_name: "${APP_ID}-web"
-    hostname: "${APP_ID}-web"
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/application
@@ -32,6 +31,12 @@ services:
       - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=${WEB_HOST}"
       - "traefik.http.services.${APP_ID}-web.loadbalancer.server.port=3000"
+      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-storybook.tls=true"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+      - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
       - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
     user: ${MY_UID}:${MY_GID}
     networks:
@@ -41,8 +46,7 @@ services:
   #   <<: *defaults
   #   image: ${NODE_IMAGE}
   #   container_name: "${APP_ID}-storybook"
-  #   hostname: "${WEB_HOSTNAME}-storybook"
-  #   command: "yarn storybook-react"
+  #   command: pnpm dev
   #   volumes:
   #     - ./:/var/www/html
   #   working_dir: /var/www/html/application
