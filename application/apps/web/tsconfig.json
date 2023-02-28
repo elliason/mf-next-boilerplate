@@ -1,6 +1,6 @@
 {
-  "extends": "@mf-project/tsconfig/next.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "extends": "@mf-project/tsconfig/nextjs.json",
+  "include": ["types", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "module": "esnext"
