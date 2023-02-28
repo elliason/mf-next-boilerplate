@@ -1,6 +1,11 @@
 {
   "extends": "@mf-project/tsconfig/base.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]
 }
