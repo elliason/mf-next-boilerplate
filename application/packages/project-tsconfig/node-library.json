@@ -3,7 +3,6 @@
   "display": "Node Library",
   "extends": "./base.json",
   "compilerOptions": {
-    "composite": true,
     "lib": ["ESNext"],
     "module": "ESNext",
     "target": "es6"
