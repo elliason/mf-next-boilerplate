@@ -20,7 +20,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "build:graph": "turbo run build --graph=my-graph.png",
-    "dev:web": "turbo run dev --filter=@mf-project/web",
+    "dev:web": "turbo run dev --filter=@mf-project/web...",
     "build:web": "turbo run build --filter=@mf-project/web..."
   },
   "devDependencies": {
