@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
-import { resolve } from 'path';
+import path, { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -26,6 +26,17 @@ export default defineConfig({
                     'react-dom': 'ReactDOM',
                 },
             },
+        },
+    },
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        setupFiles: './tests/setup.js',
+        watch: false, // maybe a good option for CI
+    },
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, 'src'),
         },
     },
 });

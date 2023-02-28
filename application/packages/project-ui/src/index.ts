@@ -1,1 +1,1 @@
-export * from './components/atoms/button/Button';
+export * from '~/components/atoms/button/Button';
