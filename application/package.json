@@ -11,16 +11,18 @@
   "workspaces": [
     "packages/*",
     "apps/*",
+    "additionals/*",
     "docs"
   ],
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "build": "turbo run build",
     "dev": "turbo run dev",
-    "build:graph": "turbo run build --graph=my-graph.png",
     "dev:web": "turbo run dev --filter=@mf-project/web...",
+    "dev:docs": "turbo run dev --filter=@mf-project/docs...",
+    "build": "turbo run build",
+    "build:graph": "turbo run build --graph=my-graph.png",
     "build:web": "turbo run build --filter=@mf-project/web..."
   },
   "devDependencies": {

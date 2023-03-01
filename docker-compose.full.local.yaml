@@ -34,13 +34,21 @@ services:
       - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=${WEB_HOST}"
       # --- storybook ---
-      # - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
-      # - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
-      # - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
-      # - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
-      # - "traefik.http.routers.${APP_ID}-storybook.tls=true"
-      # - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
-      # - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+      - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
+      - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
+      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-storybook.tls=true"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+      # --- docs ---
+      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3001"
+      - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
+      - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-docs.tls=true"
+      - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${WEB_HOST}"
       - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
     user: ${MY_UID}:${MY_GID}
     networks:

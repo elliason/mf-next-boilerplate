@@ -1,0 +1,41 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+
+services:
+  web:
+    <<: *defaults
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-web"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/application
+    command: pnpm dev:docs
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=default"
+      # --- docs ---
+      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3001"
+      - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
+      - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-docs.tls=true"
+      - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${WEB_HOST}"
+      - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
+    user: ${MY_UID}:${MY_GID}
+    networks:
+      - default
+    ports:
+      - 3001:3001

@@ -3,64 +3,53 @@ include .env
 CURRENT_UID=`id -u`
 
 init:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm install";
 
 start:
-	./bin/start
+	./bin/start --full=true
 
 stop:
-	./bin/stop
+	./bin/stop --full=true
 
 restart:
-	./bin/restart
+	./bin/restart --full=true
+
+start-web:
+	./bin/start --web=true
+
+stop-web:
+	./bin/stop --web=true
+
+restart-web:
+	./bin/restart --web=true
+
+start-storybook:
+	./bin/start --storybook=true
+
+stop-storybook:
+	./bin/stop --storybook=true
+
+restart-storybook:
+	./bin/restart --storybook=true
+
+# TODO: docs not working via docker
+# start-docs:
+# 	./bin/start --docs=true
+
+# stop-docs:
+# 	./bin/stop --docs=true
+
+# restart-docs:
+# 	./bin/restart --docs=true
 
 run-node:
 	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
-clear-node-modules:
-	docker run --rm -v `pwd`/application:/var/www/html -w /var/www/html/ $(NODE_IMAGE) bash -c "yarn clear-modules";
-
-###########################################
-######### CODE QUALITY ###########
-###########################################
-lint-fix:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn lint:fix";
+format:
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm format";
 
 lint:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn lint";
-
-format:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn format";
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm lint";
 
 test:
-	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "yarn test";
-
-###########################################
-######### DOCUMENTATION SECTION ###########
-###########################################
-
-SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
-SOURCEDIR     = _docs
-BUILDDIR      = _docs/_build
-
-ALLSPHINXOPTS = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) $(SOURCEDIR)
-
-docs-clean:
-	docker run --rm -v `pwd`/:/var/www/html -w /var/www/html docker.mediafactory.dev/php/php:7.4-fpm-buster-dev bash -c "rm -rf $(BUILDDIR)/*"
-
-docs-html:
-	docker run --rm -v `pwd`/:/var/www/html -w /var/www/html docker.mediafactory.dev/php/php:7.4-fpm-buster-dev bash -c "$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html"
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
-
-docs-changes:
-	docker run --rm -v `pwd`/:/var/www/html -w /var/www/html docker.mediafactory.dev/php/php:7.4-fpm-buster-dev bash -c "$(SPHINXBUILD) -b changes $(ALLSPHINXOPTS) $(BUILDDIR)/changes"
-	@echo
-	@echo "The overview file is in $(BUILDDIR)/changes."
-
-docs-linkcheck:
-	docker run --rm -v `pwd`/:/var/www/html -w /var/www/html docker.mediafactory.dev/php/php:7.4-fpm-buster-dev bash -c "$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck"
-	@echo
-	@echo "Link check complete; look for any errors in the above output " \
-	      "or in $(BUILDDIR)/linkcheck/output.txt."
+	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm test";

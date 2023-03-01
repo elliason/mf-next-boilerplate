@@ -3,22 +3,102 @@
 scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 rootPath="$(dirname "${scriptPath}")"
 
-if [[ ! -f "$rootPath/.env" ]]; then
-    echo "File .env not found"
-    echo
-    exit 1
+# Parse long options using getopt
+OPTIONS=$(getopt -o f:w:d:s:u: --long full:,web:,docs:,storybook,ui: -- "$@")
+
+# Check for errors
+if [ $? -ne 0 ]; then
+  echo "Error: Invalid arguments"
+  exit 1
 fi
 
-RUNENV=$1
+# Set default values
+FULL=""
+WEB=""
+DOCS=""
+STORYBOOK=""
+UI=""
+
+COMPOSE_FILE=""
+ARGS=""
+
+# Extract options and their values
+eval set -- "$OPTIONS"
+while true; do
+  case "$1" in
+    -f | --full ) FULL="$2"; shift 2 ;;
+    -w | --web ) WEB="$2"; shift 2 ;;
+    -d | --docs ) DOCS="$2"; shift 2 ;;
+    -s | --storybook ) STORYBOOK="$2"; shift 2 ;;
+    -u | --ui ) UI="$2"; shift 2 ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+# Print the options and their values
+echo "--- Start options ---"
+echo "FULL: $FULL"
+echo "WEB: $WEB"
+echo "DOCS: $DOCS"
+echo "STORYBOOK: $STORYBOOK"
+echo "UI: $UI"
+
+if [[ -z "$FULL" && -z "$WEB" && -z "$DOCS" && -z "$STORYBOOK" ]]; then
+  echo "Error: No options provided"
+  exit 1
+fi
+
+# Check if .env file exists
+if [[ ! -f "$rootPath/.env" ]]; then
+  echo "Error: File .env not found"
+  exit 1
+fi
 
 if [[ -z "$RUNENV" ]]; then
     RUNENV=$(grep RUNENV "$rootPath/.env" | cut -d '=' -f2)
 fi
 
-if [[ ! -f "$rootPath/docker-compose.$RUNENV.yaml" ]]; then
-    echo "File docker-compose.$RUNENV.yaml not found."
-    echo
-    exit 1
+# check if $RUNENV exists and is not empty
+if [[ -z "$RUNENV" ]]; then
+  echo "Error: RUNENV not found in .env file"
+  exit 1
+fi
+
+# Check if full option is provided
+if [[ ! -z "$FULL" ]]; then
+  echo "Starting full stack"
+  COMPOSE_FILE="$rootPath/docker-compose.full.$RUNENV.yaml"
+fi
+
+# Check if web option is provided
+if [[ ! -z "$WEB" ]]; then
+  echo "Starting web stack"
+  COMPOSE_FILE="$rootPath/docker-compose.web.$RUNENV.yaml"
+fi
+
+# Check if docs option is provided
+if [[ ! -z "$DOCS" ]]; then
+  echo "Starting docs stack"
+  COMPOSE_FILE="$rootPath/docker-compose.docs.$RUNENV.yaml"
+fi
+
+# Check if storybook option is provided
+if [[ ! -z "$STORYBOOK" ]]; then
+  echo "Starting storybook stack"
+  COMPOSE_FILE="$rootPath/docker-compose.storybook.$RUNENV.yaml"
+fi
+
+# Check if ui option is provided
+if [[ ! -z "$UI" ]]; then
+  echo "Starting ui stack"
+  COMPOSE_FILE="$rootPath/docker-compose.ui.$RUNENV.yaml"
+fi
+
+# Check if compose file exists
+if [[ ! -f "$COMPOSE_FILE" ]]; then
+  echo "Error: File $COMPOSE_FILE not found"
+  exit 1
 fi
 
 if [[ -z "$DOCKER_HOST_MACHINE_IP" ]]; then
@@ -28,14 +108,11 @@ fi
 export MY_UID="$(id -u)"
 export MY_GID="$(id -g)"
 
-ARGS="-f $rootPath/docker-compose.$RUNENV.yaml"
+ARGS="-f $COMPOSE_FILE"
 
-if [[ -f "$rootPath/docker-compose.extras.yaml" ]]; then
-    ARGS="$ARGS -f $rootPath/docker-compose.extras.yaml"
+if [[ ! -z "$FULL" ]]; then
+    docker-compose ${ARGS} down --remove-orphans
+    exit 0
 fi
 
-if [[ "$RUNENV" == "sync" ]]; then
-    docker-sync stop -c docker-sync.yaml
-fi
-
-docker-compose ${ARGS} down --remove-orphans
+docker-compose ${ARGS} down
