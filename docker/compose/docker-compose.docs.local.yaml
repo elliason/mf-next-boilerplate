@@ -26,7 +26,7 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=default"
       # --- docs ---
-      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3001"
+      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3010"
       - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
       - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${WEB_HOST}`)"
       - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"

@@ -4,17 +4,12 @@ scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 rootPath="$(dirname "${scriptPath}")"
 
 # Parse long options using getopt
-OPTIONS=$(getopt -o f:w:d:s:u:p: --long full:,web:,docs:,storybook:,ui:,pull: -- "$@")
-
-# Check for errors
-if [ $? -ne 0 ]; then
-  echo "Error: Invalid arguments"
-  exit 1
-fi
+OPTIONS=$(getopt -o f:w:a:d:s:u:p: --long full:,web:,admin:,docs:,storybook:,ui:,pull: -- "$@")
 
 # Set default values
 FULL=""
 WEB=""
+ADMIN=""
 DOCS=""
 STORYBOOK=""
 UI=""
@@ -22,7 +17,6 @@ UI=""
 PULL=""
 
 COMPOSE_FILE=""
-ARGS=""
 
 # Extract options and their values
 eval set -- "$OPTIONS"
@@ -30,6 +24,7 @@ while true; do
   case "$1" in
     -f | --full ) FULL="$2"; shift 2 ;;
     -w | --web ) WEB="$2"; shift 2 ;;
+    -a | --admin ) ADMIN="$2"; shift 2 ;;
     -d | --docs ) DOCS="$2"; shift 2 ;;
     -s | --storybook ) STORYBOOK="$2"; shift 2 ;;
     -u | --ui ) UI="$2"; shift 2 ;;
@@ -43,11 +38,12 @@ done
 echo "--- Start options ---"
 echo "FULL: $FULL"
 echo "WEB: $WEB"
+echo "ADMIN: $ADMIN"
 echo "DOCS: $DOCS"
 echo "STORYBOOK: $STORYBOOK"
 echo "UI: $UI"
 
-if [[ -z "$FULL" && -z "$WEB" && -z "$DOCS" && -z "$STORYBOOK" && -z "$UI" ]]; then
+if [[ -z "$FULL" && -z "$WEB" && -z "$ADMIN" && -z "$DOCS" && -z "$STORYBOOK" && -z "$UI" ]]; then
   echo "Error: No options provided"
   exit 1
 fi
@@ -56,6 +52,10 @@ fi
 if [[ ! -f "$rootPath/.env" ]]; then
   echo "Error: File .env not found"
   exit 1
+fi
+
+if [[ -z "$COMPOSE_FILE_DIRECTORY" ]]; then
+  COMPOSE_FILE_DIRECTORY=$(grep COMPOSE_FILE_DIRECTORY "$rootPath/.env" | cut -d '=' -f2)
 fi
 
 if [[ -z "$RUNENV" ]]; then
@@ -68,34 +68,46 @@ if [[ -z "$RUNENV" ]]; then
   exit 1
 fi
 
+# Check if $COMPOSE_FILE_DIRECTORY exists and is not empty
+if [[ -z "$COMPOSE_FILE_DIRECTORY" ]]; then
+  echo "Error: COMPOSE_FILE_DIRECTORY not found in .env file"
+  exit 1
+fi
+
 # Check if full option is provided
 if [[ ! -z "$FULL" ]]; then
   echo "Starting full stack"
-  COMPOSE_FILE="$rootPath/docker-compose.full.$RUNENV.yaml"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.full.$RUNENV.yaml"
 fi
 
 # Check if web option is provided
 if [[ ! -z "$WEB" ]]; then
   echo "Starting web stack"
-  COMPOSE_FILE="$rootPath/docker-compose.web.$RUNENV.yaml"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.web.$RUNENV.yaml"
+fi
+
+# Check if admin option is provided
+if [[ ! -z "$ADMIN" ]]; then
+  echo "Starting admin stack"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.admin.$RUNENV.yaml"
 fi
 
 # Check if docs option is provided
 if [[ ! -z "$DOCS" ]]; then
   echo "Starting docs stack"
-  COMPOSE_FILE="$rootPath/docker-compose.docs.$RUNENV.yaml"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.docs.$RUNENV.yaml"
 fi
 
 # Check if storybook option is provided
 if [[ ! -z "$STORYBOOK" ]]; then
   echo "Starting storybook stack"
-  COMPOSE_FILE="$rootPath/docker-compose.storybook.$RUNENV.yaml"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.storybook.$RUNENV.yaml"
 fi
 
 # Check if ui option is provided
 if [[ ! -z "$UI" ]]; then
   echo "Starting ui stack"
-  COMPOSE_FILE="$rootPath/docker-compose.ui.$RUNENV.yaml"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.ui.$RUNENV.yaml"
 fi
 
 # Check if compose file exists
@@ -155,7 +167,7 @@ fi
 export MY_UID="$(id -u)"
 export MY_GID="$(id -g)"
 
-ARGS="-f $COMPOSE_FILE"
+ARGS="--project-directory $rootPath -f $COMPOSE_FILE"
 
 if [[ ! -z "$PULL" ]]; then
   docker-compose ${ARGS} pull

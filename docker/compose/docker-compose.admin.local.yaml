@@ -1,0 +1,39 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+
+services:
+  admin:
+    <<: *defaults
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-admin"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/application
+    command: pnpm dev:admin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=default"
+      # --- admin (react/vite SPA) ---
+      - "traefik.http.services.${APP_ID}-admin.loadbalancer.server.port=3001"
+      - "traefik.http.routers.${APP_ID}-admin.service=${APP_ID}-admin"
+      - "traefik.http.routers.${APP_ID}-admin.rule=HostRegexp(`admin.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-admin.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-admin.tls=true"
+      - "traefik.http.routers.${APP_ID}-admin.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-admin.tls.domains[0].main=admin.${WEB_HOST}"
+      - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
+    user: ${MY_UID}:${MY_GID}
+    networks:
+      - default

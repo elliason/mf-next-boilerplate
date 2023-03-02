@@ -33,6 +33,14 @@ services:
       - "traefik.http.routers.${APP_ID}-web.tls=true"
       - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=web.${WEB_HOST}"
+        # --- admin (react/vite SPA) ---
+      - "traefik.http.services.${APP_ID}-admin.loadbalancer.server.port=3001"
+      - "traefik.http.routers.${APP_ID}-admin.service=${APP_ID}-admin"
+      - "traefik.http.routers.${APP_ID}-admin.rule=HostRegexp(`admin.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-admin.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-admin.tls=true"
+      - "traefik.http.routers.${APP_ID}-admin.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-admin.tls.domains[0].main=admin.${WEB_HOST}"
       # --- storybook ---
       - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
       - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
@@ -42,7 +50,7 @@ services:
       - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
       # --- docs ---
-      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3001"
+      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3010"
       - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
       - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${WEB_HOST}`)"
       - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"
@@ -50,7 +58,7 @@ services:
       - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${WEB_HOST}"
       # --- ui ---
-      - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3003"
+      - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3020"
       - "traefik.http.routers.${APP_ID}-ui.service=${APP_ID}-ui"
       - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${WEB_HOST}`)"
       - "traefik.http.routers.${APP_ID}-ui.entrypoints=https"

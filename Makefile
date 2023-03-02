@@ -23,6 +23,15 @@ stop-web:
 restart-web:
 	./bin/restart --web=true
 
+start-admin:
+	./bin/start --admin=true
+
+stop-admin:
+	./bin/stop --admin=true
+
+restart-admin:
+	./bin/restart --admin=true
+
 start-storybook:
 	./bin/start --storybook=true
 
