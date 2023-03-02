@@ -1,0 +1,37 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+
+services:
+  web:
+    <<: *defaults
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-storybook"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/application
+    command: pnpm dev:storybook
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=default"
+      - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
+      - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
+      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-storybook.tls=true"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+    user: ${MY_UID}:${MY_GID}
+    networks:
+      - default

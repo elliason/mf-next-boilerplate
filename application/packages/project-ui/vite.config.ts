@@ -1,10 +1,14 @@
-import { defineConfig } from 'vite';
+//import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
 import path, { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    server: {
+        port: 3003,
+    },
     plugins: [
         react(),
         dts({

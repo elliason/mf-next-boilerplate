@@ -4,13 +4,7 @@ scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 rootPath="$(dirname "${scriptPath}")"
 
 # Parse long options using getopt
-OPTIONS=$(getopt -o f:w:d:s:u: --long full:,web:,docs:,storybook,ui: -- "$@")
-
-# Check for errors
-if [ $? -ne 0 ]; then
-  echo "Error: Invalid arguments"
-  exit 1
-fi
+OPTIONS=$(getopt -o f:w:d:s:u: --long full:,web:,docs:,storybook:,ui: -- "$@")
 
 # Set default values
 FULL=""
@@ -37,14 +31,14 @@ while true; do
 done
 
 # Print the options and their values
-echo "--- Start options ---"
+echo "--- Stop options ---"
 echo "FULL: $FULL"
 echo "WEB: $WEB"
 echo "DOCS: $DOCS"
 echo "STORYBOOK: $STORYBOOK"
 echo "UI: $UI"
 
-if [[ -z "$FULL" && -z "$WEB" && -z "$DOCS" && -z "$STORYBOOK" ]]; then
+if [[ -z "$FULL" && -z "$WEB" && -z "$DOCS" && -z "$STORYBOOK" && -z "$UI" ]]; then
   echo "Error: No options provided"
   exit 1
 fi
@@ -67,31 +61,31 @@ fi
 
 # Check if full option is provided
 if [[ ! -z "$FULL" ]]; then
-  echo "Starting full stack"
+  echo "Stoping full stack"
   COMPOSE_FILE="$rootPath/docker-compose.full.$RUNENV.yaml"
 fi
 
 # Check if web option is provided
 if [[ ! -z "$WEB" ]]; then
-  echo "Starting web stack"
+  echo "Stoping web stack"
   COMPOSE_FILE="$rootPath/docker-compose.web.$RUNENV.yaml"
 fi
 
 # Check if docs option is provided
 if [[ ! -z "$DOCS" ]]; then
-  echo "Starting docs stack"
+  echo "Stoping docs stack"
   COMPOSE_FILE="$rootPath/docker-compose.docs.$RUNENV.yaml"
 fi
 
 # Check if storybook option is provided
 if [[ ! -z "$STORYBOOK" ]]; then
-  echo "Starting storybook stack"
+  echo "Stoping storybook stack"
   COMPOSE_FILE="$rootPath/docker-compose.storybook.$RUNENV.yaml"
 fi
 
 # Check if ui option is provided
 if [[ ! -z "$UI" ]]; then
-  echo "Starting ui stack"
+  echo "Stoping ui stack"
   COMPOSE_FILE="$rootPath/docker-compose.ui.$RUNENV.yaml"
 fi
 

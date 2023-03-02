@@ -1,0 +1,37 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+
+services:
+  web:
+    <<: *defaults
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-ui"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/application
+    command: pnpm dev:ui
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=default"
+      - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3003"
+      - "traefik.http.routers.${APP_ID}-ui.service=${APP_ID}-ui"
+      - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-ui.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-ui.tls=true"
+      - "traefik.http.routers.${APP_ID}-ui.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-ui.tls.domains[0].main=ui.${WEB_HOST}"
+    user: ${MY_UID}:${MY_GID}
+    networks:
+      - default

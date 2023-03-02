@@ -17,7 +17,7 @@ services:
   web:
     <<: *defaults
     image: ${NODE_IMAGE}
-    container_name: "${APP_ID}-web"
+    container_name: "${APP_ID}-frontend"
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/application
@@ -28,11 +28,11 @@ services:
       # --- web (nextjs) ---
       - "traefik.http.services.${APP_ID}-web.loadbalancer.server.port=3000"
       - "traefik.http.routers.${APP_ID}-web.service=${APP_ID}-web"
-      - "traefik.http.routers.${APP_ID}-web.rule=HostRegexp(`${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-web.rule=HostRegexp(`web.${WEB_HOST}`)"
       - "traefik.http.routers.${APP_ID}-web.entrypoints=https"
       - "traefik.http.routers.${APP_ID}-web.tls=true"
       - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=${WEB_HOST}"
+      - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=web.${WEB_HOST}"
       # --- storybook ---
       - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
       - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
@@ -49,6 +49,14 @@ services:
       - "traefik.http.routers.${APP_ID}-docs.tls=true"
       - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
       - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${WEB_HOST}"
+      # --- ui ---
+      - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3003"
+      - "traefik.http.routers.${APP_ID}-ui.service=${APP_ID}-ui"
+      - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-ui.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-ui.tls=true"
+      - "traefik.http.routers.${APP_ID}-ui.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-ui.tls.domains[0].main=ui.${WEB_HOST}"
       - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
     user: ${MY_UID}:${MY_GID}
     networks:

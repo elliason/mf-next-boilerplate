@@ -20,6 +20,8 @@
     "test": "turbo run test",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=@mf-project/web...",
+    "dev:storybook": "turbo run dev --filter=@mf-project/ui-storybook...",
+    "dev:ui": "turbo run dev:server --filter=@mf-project/ui...",
     "dev:docs": "turbo run dev --filter=@mf-project/docs...",
     "build": "turbo run build",
     "build:graph": "turbo run build --graph=my-graph.png",

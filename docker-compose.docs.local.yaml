@@ -17,7 +17,7 @@ services:
   web:
     <<: *defaults
     image: ${NODE_IMAGE}
-    container_name: "${APP_ID}-web"
+    container_name: "${APP_ID}-docs"
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/application

@@ -33,14 +33,23 @@ restart-storybook:
 	./bin/restart --storybook=true
 
 # TODO: docs not working via docker
-# start-docs:
-# 	./bin/start --docs=true
+start-docs:
+	./bin/start --docs=true
 
-# stop-docs:
-# 	./bin/stop --docs=true
+stop-docs:
+	./bin/stop --docs=true
 
-# restart-docs:
-# 	./bin/restart --docs=true
+restart-docs:
+	./bin/restart --docs=true
+
+start-ui:
+	./bin/start --ui=true
+
+stop-ui:
+	./bin/stop --ui=true
+
+restart-ui:
+	./bin/restart --ui=true
 
 run-node:
 	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
