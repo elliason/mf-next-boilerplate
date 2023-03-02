@@ -1,0 +1,10 @@
+{
+  "extends": "@media-factory-cz/typescript-config",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "esnext",
+    "lib": ["esnext", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["./**/*.ts"]
+}

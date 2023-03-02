@@ -1,0 +1,16 @@
+{
+  "name": "@mf-project/testing",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "workspaces": [
+    "cypress/*"
+  ],
+  "scripts": {
+    "open:web": "pnpm run cypress:open --filter @mf-project/cypress-web"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
