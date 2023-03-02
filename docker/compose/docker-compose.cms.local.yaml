@@ -1,0 +1,80 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+  intnet:
+    external: false
+    name: ${APP_ID}-cms-intnet
+    driver: bridge
+
+volumes:
+  cms-db-data:
+    driver: local
+
+services:
+  db:
+    <<: *defaults
+    image: postgres
+    container_name: "${APP_ID}-cms-db"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${CMS_DB_PASSWORD}
+      POSTGRES_USER: ${CMS_DB_USERNAME}
+      POSTGRES_DB: ${CMS_DB_NAME}
+    volumes:
+      - cms-db-data:/var/lib/postgresql/data
+    labels:
+      - "traefik.enable=false"
+    networks:
+      - intnet
+
+  adminer:
+    image: adminer
+    container_name: "${APP_ID}-adminer"
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${DOCKER_NETWORK}"
+      - "traefik.http.routers.${APP_ID}-adminer.rule=Host(`adminer.cms.${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-adminer.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-adminer.tls=true"
+      - "traefik.http.routers.${APP_ID}-adminer.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-adminer.tls.domains[0].main=adminer.cms.${APP_HOST}"
+    networks:
+      - default
+      - intnet
+    depends_on:
+      - db
+
+    # image: ${NODE_IMAGE}
+    # container_name: "${APP_ID}-cms"
+    # volumes:
+    #   - ./:/var/www/html
+    # working_dir: /var/www/html/application
+    # command: pnpm dev:web
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.docker.network=default"
+    #   # --- web (nextjs) ---
+    #   - "traefik.http.services.${APP_ID}-web.loadbalancer.server.port=3000"
+    #   - "traefik.http.routers.${APP_ID}-web.service=${APP_ID}-web"
+    #   - "traefik.http.routers.${APP_ID}-web.rule=HostRegexp(`web.${APP_HOST}`)"
+    #   - "traefik.http.routers.${APP_ID}-web.entrypoints=https"
+    #   - "traefik.http.routers.${APP_ID}-web.tls=true"
+    #   - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
+    #   - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=web.${APP_HOST}"
+    #
+    # user: ${MY_UID}:${MY_GID}
+    # networks:
+    #   - default

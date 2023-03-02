@@ -27,11 +27,11 @@ services:
       - "traefik.docker.network=default"
       - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3020"
       - "traefik.http.routers.${APP_ID}-ui.service=${APP_ID}-ui"
-      - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${APP_HOST}`)"
       - "traefik.http.routers.${APP_ID}-ui.entrypoints=https"
       - "traefik.http.routers.${APP_ID}-ui.tls=true"
       - "traefik.http.routers.${APP_ID}-ui.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-ui.tls.domains[0].main=ui.${WEB_HOST}"
+      - "traefik.http.routers.${APP_ID}-ui.tls.domains[0].main=ui.${APP_HOST}"
     user: ${MY_UID}:${MY_GID}
     networks:
       - default

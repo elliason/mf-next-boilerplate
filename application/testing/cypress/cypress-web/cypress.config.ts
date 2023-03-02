@@ -11,7 +11,7 @@ config({ path: envFile });
 export default defineConfig({
     e2e: {
         /* ---- IMPORTANT: DOMAIN HAS TO BE ADDED TO HOSTS FILE ---- */
-        baseUrl: process.env.WEB_HOST ? `https://web.${process.env.WEB_HOST}` : 'http://localhost:3000',
+        baseUrl: process.env.APP_HOST ? `https://web.${process.env.APP_HOST}` : 'http://localhost:3000',
         /* ---- IMPORTANT: DOMAIN HAS TO BE ADDED TO HOSTS FILE ---- */
     },
 });

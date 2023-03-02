@@ -28,12 +28,12 @@ services:
       # --- docs ---
       - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3010"
       - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
-      - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${APP_HOST}`)"
       - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"
       - "traefik.http.routers.${APP_ID}-docs.tls=true"
       - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${WEB_HOST}"
-      - "dev.mediafactory.application.runenv=${USE_ENVIRONMENT}"
+      - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${APP_HOST}"
+
     user: ${MY_UID}:${MY_GID}
     networks:
       - default

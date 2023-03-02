@@ -27,11 +27,11 @@ services:
       - "traefik.docker.network=default"
       - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
       - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
-      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${WEB_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${APP_HOST}`)"
       - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
       - "traefik.http.routers.${APP_ID}-storybook.tls=true"
       - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
-      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${WEB_HOST}"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${APP_HOST}"
     user: ${MY_UID}:${MY_GID}
     networks:
       - default

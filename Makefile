@@ -41,7 +41,6 @@ stop-storybook:
 restart-storybook:
 	./bin/restart --storybook=true
 
-# TODO: docs not working via docker
 start-docs:
 	./bin/start --docs=true
 
@@ -51,6 +50,16 @@ stop-docs:
 restart-docs:
 	./bin/restart --docs=true
 
+start-cms:
+	./bin/start --cms=true
+
+stop-cms:
+	./bin/stop --cms=true
+
+restart-cms:
+	./bin/restart --cms=true
+
+# UI is not included in full, can only run idependently
 start-ui:
 	./bin/start --ui=true
 
