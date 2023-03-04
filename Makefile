@@ -7,21 +7,27 @@ init:
 
 start:
 	./bin/start --full=true
+	make start-cms
 
 stop:
 	./bin/stop --full=true
+	make stop-cms
 
 restart:
 	./bin/restart --full=true
+	make restart-cms
 
 start-web:
 	./bin/start --web=true
+	make start-cms
 
 stop-web:
 	./bin/stop --web=true
+	make stop-cms
 
 restart-web:
 	./bin/restart --web=true
+	make restart-cms
 
 start-admin:
 	./bin/start --admin=true
@@ -71,6 +77,9 @@ restart-ui:
 
 run-node:
 	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
+
+run-node-cms:
+	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application/backends/cms -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
 format:
 	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm format";

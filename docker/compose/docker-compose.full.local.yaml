@@ -14,7 +14,7 @@ networks:
     name: ${DOCKER_NETWORK}
 
 services:
-  web:
+  frontend:
     <<: *defaults
     image: ${NODE_IMAGE}
     container_name: "${APP_ID}-frontend"
