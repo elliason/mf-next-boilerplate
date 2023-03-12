@@ -21,7 +21,8 @@ services:
     volumes:
       - ./:/var/www/html
     working_dir: /var/www/html/application
-    command: pnpm dev:storybook
+    #command: pnpm dev:storybook
+    command: pnpm dev:storybook7
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=default"
