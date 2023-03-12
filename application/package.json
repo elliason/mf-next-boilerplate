@@ -20,7 +20,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --filter=!@mf-project/ui-storybook7",
     "dev:web": "turbo run dev --filter=@mf-project/web...",
     "dev:admin": "turbo run dev --filter=@mf-project/admin...",
     "dev:storybook": "turbo run dev --filter=@mf-project/ui-storybook7...",
