@@ -17,6 +17,7 @@ module.exports = {
     },
     webpackFinal: async (config, { configType }) => {
         config.resolve.plugins = [new TsconfigPathsPlugin()];
+        //config.devServer.client.webSocketURL = `wss://storybook.mfproject.localhost:443/storybook-server-channel`;
 
         return config;
     },

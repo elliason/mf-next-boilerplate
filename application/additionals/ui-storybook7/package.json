@@ -1,0 +1,40 @@
+{
+  "name": "@mf-project/ui-storybook7",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "start": "serve storybook-static -l 6007",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@mf-project/ui": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "serve": "^14.2.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.4.3",
+    "@mf-project/tsconfig": "workspace:*",
+    "@storybook/addon-actions": "^7.0.0-rc.1",
+    "@storybook/addon-essentials": "^7.0.0-rc.1",
+    "@storybook/addon-interactions": "^7.0.0-rc.1",
+    "@storybook/addon-links": "^7.0.0-rc.1",
+    "@storybook/cli": "^7.0.0-rc.1",
+    "@storybook/react": "^7.0.0-rc.1",
+    "@storybook/react-vite": "7.0.0-rc.1",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.4.3",
+    "storybook": "^7.0.0-rc.1",
+    "ts-jest": "^29.0.5",
+    "tsconfig-paths-webpack-plugin": "^4.0.0",
+    "typescript": "^4.9.5"
+  }
+}
