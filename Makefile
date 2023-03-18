@@ -79,7 +79,7 @@ run-node:
 	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
 run-node-cms:
-	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application/backends/cms -u $(CURRENT_UID) $(NODE_IMAGE) bash;
+	docker run -it --rm -v `pwd`/application/backends/cms:/var/www/html -w /var/www/html -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
 format:
 	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm format";

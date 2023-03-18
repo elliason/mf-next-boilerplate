@@ -50,8 +50,8 @@ services:
     ports:
       - "1337:1337"
     volumes:
-      - ./:/var/www/html/
-    working_dir: /var/www/html/application/backends/cms
+      - ./application/backends/cms:/var/www/html
+    working_dir: /var/www/html
     depends_on:
       - db
     networks:
