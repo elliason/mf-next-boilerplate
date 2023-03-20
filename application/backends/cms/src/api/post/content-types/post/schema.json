@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": false
     },
     "description": {
       "type": "text"
@@ -26,10 +27,7 @@
       "multiple": true,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "uid": {
@@ -37,6 +35,27 @@
     },
     "Title": {
       "type": "string"
+    },
+    "Files": {
+      "allowedTypes": [
+        "files"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Audios": {
+      "allowedTypes": [
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "Videos": {
+      "allowedTypes": [
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
