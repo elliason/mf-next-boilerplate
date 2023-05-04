@@ -11,20 +11,18 @@
   "workspaces": [
     "packages/*",
     "apps/*",
-    "additionals/*",
     "docs",
     "backends/*",
     "!backends/*/cms"
   ],
   "scripts": {
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\"",
+    "format": "turbo run format",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "dev": "turbo run dev --filter=!@mf-project/ui-storybook7",
     "dev:web": "turbo run dev --filter=@mf-project/web...",
     "dev:admin": "turbo run dev --filter=@mf-project/admin...",
     "dev:storybook": "turbo run dev --filter=@mf-project/ui-storybook...",
-    "dev:storybook7": "turbo run dev --filter=@mf-project/ui-storybook...",
     "dev:ui": "turbo run dev:server --filter=@mf-project/ui...",
     "dev:docs": "turbo run dev --filter=@mf-project/docs...",
     "build": "turbo run build",
@@ -32,11 +30,6 @@
     "build:web": "turbo run build --filter=@mf-project/web..."
   },
   "devDependencies": {
-    "@media-factory-cz/prettier-config": "^1.0.3",
-    "@types/node": "^18.14.0",
-    "prettier": "^2.8.4"
-  },
-  "dependencies": {
     "turbo": "^1.8.2"
   }
 }

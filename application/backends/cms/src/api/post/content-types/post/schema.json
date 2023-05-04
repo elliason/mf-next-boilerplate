@@ -26,9 +26,7 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "uid": {
       "type": "uid"
@@ -37,23 +35,17 @@
       "type": "string"
     },
     "Files": {
-      "allowedTypes": [
-        "files"
-      ],
+      "allowedTypes": ["files"],
       "type": "media",
       "multiple": true
     },
     "Audios": {
-      "allowedTypes": [
-        "audios"
-      ],
+      "allowedTypes": ["audios"],
       "type": "media",
       "multiple": true
     },
     "Videos": {
-      "allowedTypes": [
-        "videos"
-      ],
+      "allowedTypes": ["videos"],
       "type": "media",
       "multiple": true
     }

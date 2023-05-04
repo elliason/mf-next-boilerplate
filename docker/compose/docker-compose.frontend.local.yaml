@@ -1,0 +1,71 @@
+version: "3.9"
+
+x-defaults: &defaults
+  restart: ${DOCKER_RESTART_POLICY}
+  logging:
+    driver: "json-file"
+    options:
+      max-file: "10"
+      max-size: "10m"
+
+networks:
+  default:
+    external: true
+    name: ${DOCKER_NETWORK}
+
+services:
+  frontend:
+    <<: *defaults
+    image: ${NODE_IMAGE}
+    container_name: "${APP_ID}-frontend"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html/application
+    command: pnpm dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${DOCKER_NETWORK}"
+      # --- web (nextjs) ---
+      - "traefik.http.services.${APP_ID}-web.loadbalancer.server.port=3000"
+      - "traefik.http.routers.${APP_ID}-web.service=${APP_ID}-web"
+      - "traefik.http.routers.${APP_ID}-web.rule=HostRegexp(`${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-web.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-web.tls=true"
+      - "traefik.http.routers.${APP_ID}-web.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-web.tls.domains[0].main=${APP_HOST}"
+        # --- admin (react/vite SPA) ---
+      - "traefik.http.services.${APP_ID}-admin.loadbalancer.server.port=3001"
+      - "traefik.http.routers.${APP_ID}-admin.service=${APP_ID}-admin"
+      - "traefik.http.routers.${APP_ID}-admin.rule=HostRegexp(`admin.${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-admin.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-admin.tls=true"
+      - "traefik.http.routers.${APP_ID}-admin.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-admin.tls.domains[0].main=admin.${APP_HOST}"
+      # --- storybook ---
+      - "traefik.http.services.${APP_ID}-storybook.loadbalancer.server.port=6006"
+      - "traefik.http.routers.${APP_ID}-storybook.service=${APP_ID}-storybook"
+      - "traefik.http.routers.${APP_ID}-storybook.rule=Host(`storybook.${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-storybook.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-storybook.tls=true"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-storybook.tls.domains[0].main=storybook.${APP_HOST}"
+      # --- docs ---
+      - "traefik.http.services.${APP_ID}-docs.loadbalancer.server.port=3010"
+      - "traefik.http.routers.${APP_ID}-docs.service=${APP_ID}-docs"
+      - "traefik.http.routers.${APP_ID}-docs.rule=Host(`docs.${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-docs.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-docs.tls=true"
+      - "traefik.http.routers.${APP_ID}-docs.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-docs.tls.domains[0].main=docs.${APP_HOST}"
+      # --- ui ---
+      - "traefik.http.services.${APP_ID}-ui.loadbalancer.server.port=3020"
+      - "traefik.http.routers.${APP_ID}-ui.service=${APP_ID}-ui"
+      - "traefik.http.routers.${APP_ID}-ui.rule=Host(`ui.${APP_HOST}`)"
+      - "traefik.http.routers.${APP_ID}-ui.entrypoints=https"
+      - "traefik.http.routers.${APP_ID}-ui.tls=true"
+      - "traefik.http.routers.${APP_ID}-ui.tls.certresolver=local"
+      - "traefik.http.routers.${APP_ID}-ui.tls.domains[0].main=ui.${APP_HOST}"
+
+    user: ${MY_UID}:${MY_GID}
+    networks:
+      - default

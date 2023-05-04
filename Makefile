@@ -5,16 +5,16 @@ CURRENT_UID=`id -u`
 init:
 	docker run --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash -c "pnpm install";
 
-start:
-	./bin/start --full=true
+start-frontend:
+	./bin/start --frontend=true
 	make start-cms
 
-stop:
-	./bin/stop --full=true
+stop-frontend:
+	./bin/stop --frontend=true
 	make stop-cms
 
-restart:
-	./bin/restart --full=true
+restart-frontend:
+	./bin/restart --frontend=true
 	make restart-cms
 
 start-web:
@@ -29,14 +29,14 @@ restart-web:
 	./bin/restart --web=true
 	make restart-cms
 
-start-admin:
-	./bin/start --admin=true
+# start-admin:
+# 	./bin/start --admin=true
 
-stop-admin:
-	./bin/stop --admin=true
+# stop-admin:
+# 	./bin/stop --admin=true
 
-restart-admin:
-	./bin/restart --admin=true
+# restart-admin:
+# 	./bin/restart --admin=true
 
 start-storybook:
 	./bin/start --storybook=true
@@ -65,7 +65,6 @@ stop-cms:
 restart-cms:
 	./bin/restart --cms=true
 
-# UI is not included in full, can only run idependently
 start-ui:
 	./bin/start --ui=true
 
@@ -75,10 +74,10 @@ stop-ui:
 restart-ui:
 	./bin/restart --ui=true
 
-run-node:
+frontend-container:
 	docker run -it --rm -v `pwd`:/var/www/html -w /var/www/html/application -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
-run-node-cms:
+cms-container:
 	docker run -it --rm -v `pwd`/application/backends/cms:/var/www/html -w /var/www/html -u $(CURRENT_UID) $(NODE_IMAGE) bash;
 
 format:

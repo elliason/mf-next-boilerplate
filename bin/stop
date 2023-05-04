@@ -4,10 +4,10 @@ scriptPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 rootPath="$(dirname "${scriptPath}")"
 
 # Parse long options using getopt
-OPTIONS=$(getopt -o f:w:a:d:s:u:c: --long full:,web:,admin:,docs:,storybook:,ui:,cms: -- "$@")
+OPTIONS=$(getopt -o f:w:a:d:s:u:c: --long frontend:,web:,admin:,docs:,storybook:,ui:,cms: -- "$@")
 
 # Set default values
-FULL=""
+FRONTEND=""
 WEB=""
 ADMIN=""
 DOCS=""
@@ -22,7 +22,7 @@ ARGS=""
 eval set -- "$OPTIONS"
 while true; do
   case "$1" in
-    -f | --full ) FULL="$2"; shift 2 ;;
+    -f | --frontend ) FRONTEND="$2"; shift 2 ;;
     -w | --web ) WEB="$2"; shift 2 ;;
     -a | --admin ) ADMIN="$2"; shift 2 ;;
     -d | --docs ) DOCS="$2"; shift 2 ;;
@@ -36,7 +36,7 @@ done
 
 # Print the options and their values
 echo "--- Stop options ---"
-echo "FULL: $FULL"
+echo "FRONTEND: $FRONTEND"
 echo "WEB: $WEB"
 echo "ADMIN: $ADMIN"
 echo "DOCS: $DOCS"
@@ -44,7 +44,7 @@ echo "STORYBOOK: $STORYBOOK"
 echo "UI: $UI"
 echo "CMS: $CMS"
 
-if [[ -z "$FULL" && -z "$WEB" && -z "$ADMIN" && -z "$DOCS" && -z "$STORYBOOK" && -z "$UI" && -z "$CMS" ]]; then
+if [[ -z "$FRONTEND" && -z "$WEB" && -z "$ADMIN" && -z "$DOCS" && -z "$STORYBOOK" && -z "$UI" && -z "$CMS" ]]; then
   echo "Error: No options provided"
   exit 1
 fi
@@ -75,10 +75,10 @@ if [[ -z "$COMPOSE_FILE_DIRECTORY" ]]; then
   exit 1
 fi
 
-# Check if full option is provided
-if [[ ! -z "$FULL" ]]; then
-  echo "Stoping full stack"
-  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.full.$RUNENV.yaml"
+# Check if frontend option is provided
+if [[ ! -z "$FRONTEND" ]]; then
+  echo "Stoping frontend stack"
+  COMPOSE_FILE="$rootPath/$COMPOSE_FILE_DIRECTORY/docker-compose.frontend.$RUNENV.yaml"
 fi
 
 # Check if web option is provided
@@ -132,7 +132,7 @@ export MY_GID="$(id -g)"
 
 ARGS="--project-directory $rootPath -f $COMPOSE_FILE"
 
-if [[ ! -z "$FULL" ]]; then
+if [[ ! -z "$FRONTEND" ]]; then
     docker-compose ${ARGS} down --remove-orphans
     exit 0
 fi

@@ -7,10 +7,13 @@
     "dev": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml.md,mdx}\""
   },
   "devDependencies": {
-    "@strapi/typescript-utils": "^4.8.2"
+    "@strapi/typescript-utils": "^4.8.2",
+    "prettier": "^2.8.8",
+    "@media-factory-cz/prettier-config": "^1.0.3"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.8.2",

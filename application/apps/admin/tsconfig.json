@@ -1,8 +1,0 @@
-{
-  "extends": "@mf-project/tsconfig/react-spa.json",
-  "compilerOptions": {
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
-}
