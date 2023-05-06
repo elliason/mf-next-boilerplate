@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "extends": "@media-factory-cz/typescript-config",
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "target": "ES2018"
+  },
+  "exclude": ["node_modules"]
+}

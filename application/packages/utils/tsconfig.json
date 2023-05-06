@@ -1,5 +1,5 @@
 {
-  "extends": "@mf-project/tsconfig/base.json",
+  "extends": "@mf-project/typescript-config/base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

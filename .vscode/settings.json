@@ -1,4 +1,8 @@
 {
   "stylelint.packageManager": "pnpm",
-  "stylelint.validate": ["css", "scss", "less", "postcss"]
+  "eslint.packageManager": "pnpm",
+  "stylelint.validate": ["css", "scss", "less", "postcss"],
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "warning",
+  "postcss.validate": true
 }

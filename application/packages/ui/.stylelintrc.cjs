@@ -1,4 +1,3 @@
 module.exports = {
-    extends: '@mf-project/stylelint-config/index.js',
-    rules: {},
+    extends: '@mf-project/stylelint-config',
 };
