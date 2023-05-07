@@ -1,8 +1,20 @@
 {
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
   "stylelint.packageManager": "pnpm",
   "eslint.packageManager": "pnpm",
+  "eslint.run": "onSave",
   "stylelint.validate": ["css", "scss", "less", "postcss"],
   "css.lint.unknownAtRules": "ignore",
   "scss.lint.unknownAtRules": "warning",
-  "postcss.validate": true
+  "postcss.validate": true,
+  "prettier.documentSelectors": [
+    "**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml,md,mdx,svg,html}"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  }
 }
