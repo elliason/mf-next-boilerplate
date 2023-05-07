@@ -1,0 +1,6 @@
+.turbo
+coverage
+dist
+build
+vendor
+node_modules

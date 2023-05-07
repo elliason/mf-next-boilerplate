@@ -1,4 +1,5 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
@@ -11,9 +12,8 @@
   "scss.lint.unknownAtRules": "warning",
   "postcss.validate": true,
   "prettier.documentSelectors": [
-    "**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml,md,mdx,svg,html}"
+    "**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,less,json,yml,yaml,md,mdx,svg,html,graphql}"
   ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   }
