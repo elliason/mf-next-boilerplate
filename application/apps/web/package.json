@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@mf-project/eslint-config": "workspace:^",
+    "@mf-project/prettier-config": "workspace:^",
     "@mf-project/stylelint-config": "workspace:^",
     "@mf-project/typescript-config": "workspace:^",
     "@tailwindcss/forms": "^0.5.3",

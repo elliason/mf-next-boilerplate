@@ -1,7 +1,7 @@
 {
   "name": "@mf-project/root",
   "version": "0.0.1",
-  "description": "Media Factory boilerplate for next js based projects",
+  "description": "Media Factory boilerplate for React/Next.js based projects",
   "author": "Media Factory CZ <info@mediafactorygroup.cz>",
   "private": true,
   "type": "module",
@@ -11,6 +11,7 @@
   "workspaces": [
     "packages/*",
     "apps/*",
+    "tools/*",
     "docs",
     "backends/*",
     "!backends/*/cms"
@@ -19,9 +20,8 @@
     "format": "turbo run format",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "dev": "turbo run dev --filter=!@mf-project/ui-storybook7",
+    "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter=@mf-project/web...",
-    "dev:admin": "turbo run dev --filter=@mf-project/admin...",
     "dev:storybook": "turbo run dev --filter=@mf-project/ui-storybook...",
     "dev:ui": "turbo run dev:server --filter=@mf-project/ui...",
     "dev:docs": "turbo run dev --filter=@mf-project/docs...",

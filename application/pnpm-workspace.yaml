@@ -1,6 +1,7 @@
 packages:
-    - 'apps/*'
-    - 'packages/*'
-    - 'docs'
-    - 'backends/*'
-    - '!backends/cms'
+  - "apps/*"
+  - "packages/*"
+  - "tools/*"
+  - "docs"
+  - "backends/*"
+  - "!backends/cms"
