@@ -3,6 +3,7 @@ module.exports = {
     importOrder: [
         '^(react/(.*)$)|^(react$)',
         '^(next/(.*)$)|^(next$)',
+        '^(@mf-project/(.*)$)',
         '<THIRD_PARTY_MODULES>',
         '^types$',
         '^types$',
